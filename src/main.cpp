@@ -101,6 +101,7 @@ int main() {
     // open file
     openFile();
 
+    // todo work on this loop more
     while(true) {
         if (Serial.read() == "Stop") {
             Serial.println("Reading file.");
