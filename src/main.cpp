@@ -26,7 +26,7 @@ void readFile(String serialInput) {
         while (sensorData.available()) {
             Serial.write(sensorData.read());
         }
-        Serial.println("\n}");
+        Serial.println("}");
         while(true) {
             serialInput = Serial.readString();
             if (serialInput == CLOSE) {
@@ -77,7 +77,7 @@ void clearDataFile() {
 
 void readSensorsAndLogLoop() {
     // for counting when to sample
-    uint8_t counter = 0;
+    int counter = 0;
 
     while(true) {
         String serialInput(Serial.readString());
@@ -111,14 +111,14 @@ void readSensorsAndLogLoop() {
                         Serial.println("tilt true");
                     }
 
-                    if (LOG_TEMP_TIME % counter == 0) {
+                    if (counter == LOG_TEMP_TIME) {
                         float val = analogRead(TEMP_PIN);
                         float cel = (5.0 * val * 100.0)/1024.0;
                         float f = ((cel*9)/5) + 32;
 
                         sensorData.println("\t{tempF: " + (String)f + "}");
 
-                        counter = (counter == 50) ? 0 : counter;
+                        counter = 0;
                         // remove this log at some point
                         Serial.println("farh: " + (String)f);
                     }
@@ -135,7 +135,7 @@ void readSensorsAndLogLoop() {
             closeFile();
 
         } else if (serialInput == CLEAR) {
-            SD.remove("data.txt");
+            clearDataFile();
         }
     }
 }
