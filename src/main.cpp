@@ -7,8 +7,8 @@
 #define SD_PIN 7
 #define TEMP_PIN A2
 // using a delay in main loop of 100ms and wanting to sample temp every 5sec so
-// every loop iteration is LOG_TEMP_TIME/counter+1 = (delay+100 * 50) = 5000
-#define LOG_TEMP_TIME 0 || 50
+// every loop iteration is (delay=100 * 50) = 5000
+#define LOG_TEMP_TIME 50
 
 #define STOP "stop"
 #define START "start"
