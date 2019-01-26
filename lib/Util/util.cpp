@@ -93,7 +93,7 @@ void Util::readSensorsAndLogLoop() {
         // convert to switch statement at some point
         if (u->_serialInput == START) {
             u->openFileWrite(u);
-            u->_sensorData.println("{open: true}");
+            u->_sensorData.println("{open: true},");
             if (u->_sensorData) {
                 while(true) {
                     // get some input
@@ -112,7 +112,7 @@ void Util::readSensorsAndLogLoop() {
                     }
                     delay(50);
                     if (counter == LOG_TEMP_TIME) {
-                        float dummyRead = analogRead(TEMP_PIN);
+                        /*float dummyRead = */analogRead(TEMP_PIN);
                         delay(50);
                         float val = analogRead(TEMP_PIN);
                         float cel = (5.0 * val * 100.0)/1024.0;
